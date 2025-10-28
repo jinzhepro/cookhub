@@ -45,12 +45,12 @@ export default async function ChefDetail({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
       <Header showBackLink={true} logoSize="small" showSubtitle={false} />
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <main className="max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex-1">
         {/* Chef Header */}
         <div className="bg-white rounded-lg shadow-md p-8 mb-8">
           <div className="text-center">
@@ -96,15 +96,6 @@ export default async function ChefDetail({
           )}
         </div>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-white border-t mt-12">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <p className="text-center text-gray-500 text-sm">
-            © 2025 CookHub. 保留所有权利。
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

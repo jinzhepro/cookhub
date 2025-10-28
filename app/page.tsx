@@ -91,12 +91,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
       <Header logoSize="large" showSubtitle={true} />
 
       {/* Search Bar */}
-      <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
         <div className="relative max-w-2xl mx-auto">
           <input
             type="text"
@@ -125,7 +125,7 @@ export default function Home() {
       </div>
 
       {/* Ingredients Filter */}
-      <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center gap-2 mb-4">
           <span className="text-gray-700 font-medium">你想吃什么？</span>
           {allMainIngredients.map((ingredient) => (
@@ -177,7 +177,7 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex-1">
         <div className="text-center mb-12">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             欢迎来到 CookHub
@@ -242,15 +242,6 @@ export default function Home() {
           )}
         </section>
       </main>
-
-      {/* Footer */}
-      <footer className="bg-white border-t mt-12">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <p className="text-center text-gray-500 text-sm">
-            © 2025 CookHub. 保留所有权利。
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }
