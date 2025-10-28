@@ -9,9 +9,6 @@ interface ChefCardProps {
 export default function ChefCard({ id, name, specialty }: ChefCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-md p-6 text-center">
-      <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-        <span className="text-gray-500">厨师头像</span>
-      </div>
       <h4 className="text-lg font-medium text-gray-900">{name}</h4>
       <p className="text-gray-600 text-sm mt-1">{specialty}</p>
       <Link

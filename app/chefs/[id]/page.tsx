@@ -61,17 +61,12 @@ export default async function ChefDetail({
       <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         {/* Chef Header */}
         <div className="bg-white rounded-lg shadow-md p-8 mb-8">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center mb-6 md:mb-0 md:mr-8">
-              <span className="text-gray-500">厨师头像</span>
-            </div>
-            <div className="text-center md:text-left">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                {chef.name}
-              </h1>
-              <p className="text-xl text-blue-600 mb-4">{chef.specialty}</p>
-              <p className="text-gray-600 max-w-2xl">{chef.bio}</p>
-            </div>
+          <div className="text-center">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              {chef.name}
+            </h1>
+            <p className="text-xl text-blue-600 mb-4">{chef.specialty}</p>
+            <p className="text-gray-600 max-w-2xl mx-auto">{chef.bio}</p>
           </div>
         </div>
 
