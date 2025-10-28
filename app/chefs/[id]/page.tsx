@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import React from "react";
+import Header from "@/app/components/Header";
 
 // 从数据文件加载厨师和菜谱数据
 import chefsData from "@/app/data/chefs.json";
@@ -46,16 +47,7 @@ export default async function ChefDetail({
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex items-center">
-            <Link href="/" className="text-blue-500 hover:text-blue-700">
-              &larr; 返回首页
-            </Link>
-            <h1 className="ml-4 text-3xl font-bold text-gray-900">CookHub</h1>
-          </div>
-        </div>
-      </header>
+      <Header showBackLink={true} logoSize="small" showSubtitle={false} />
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">

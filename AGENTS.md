@@ -4,7 +4,7 @@ This file provides guidance to agents when working with code in this repository.
 
 ## 项目概述
 
-CookHub 是一个基于 Next.js 的中文菜谱展示网站，展示来自抖音平台的名厨菜谱。
+CookHub 是一个基于 Next.js 的中文菜谱展示网站，展示来自互联网平台的名厨菜谱。
 
 ## 构建和开发命令
 

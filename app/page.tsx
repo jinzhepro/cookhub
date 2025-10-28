@@ -2,6 +2,7 @@
 
 import RecipeCard from "@/app/components/RecipeCard";
 import ChefCard from "@/app/components/ChefCard";
+import Header from "@/app/components/Header";
 import { useState, useEffect } from "react";
 
 // 从数据文件加载菜谱和厨师数据
@@ -92,12 +93,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900">CookHub</h1>
-          <p className="mt-1 text-gray-600">发现抖音名厨的精彩菜谱</p>
-        </div>
-      </header>
+      <Header logoSize="large" showSubtitle={true} />
 
       {/* Search Bar */}
       <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
@@ -131,7 +127,7 @@ export default function Home() {
       {/* Ingredients Filter */}
       <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center gap-2 mb-4">
-          <span className="text-gray-700 font-medium">主要食材筛选:</span>
+          <span className="text-gray-700 font-medium">你想吃什么？</span>
           {allMainIngredients.map((ingredient) => (
             <button
               key={ingredient}
@@ -187,7 +183,7 @@ export default function Home() {
             欢迎来到 CookHub
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            探索来自抖音平台的名厨菜谱，学习制作美味佳肴
+            探索来自互联网平台的名厨菜谱，学习制作美味佳肴
           </p>
         </div>
 

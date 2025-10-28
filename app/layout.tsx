@@ -8,7 +8,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "CookHub - 抖音名厨菜谱集合",
-  description: "发现和学习来自抖音平台的名厨菜谱",
+  description: "发现和学习来自互联网平台的名厨菜谱",
+  icons: {
+    icon: "/ico.png",
+  },
 };
 
 export default function RootLayout({
