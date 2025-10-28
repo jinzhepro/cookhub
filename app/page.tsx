@@ -4,27 +4,49 @@ import RecipeCard from "@/app/components/RecipeCard";
 import ChefCard from "@/app/components/ChefCard";
 import { useState, useEffect } from "react";
 
-// 模拟菜谱数据
+// 模拟菜谱数据（包含主要食材信息）
 const recipes = [
   {
     id: 1,
     title: "红烧肉",
     description: "经典中式菜肴，肥而不腻",
     difficulty: "中等",
+    mainIngredients: ["五花肉"],
   },
   {
     id: 2,
     title: "宫保鸡丁",
     description: "经典川菜，酸甜可口",
     difficulty: "简单",
+    mainIngredients: ["鸡胸肉", "花生米"],
   },
   {
     id: 3,
     title: "麻婆豆腐",
     description: "麻辣鲜香，下饭佳品",
     difficulty: "简单",
+    mainIngredients: ["嫩豆腐", "牛肉末"],
+  },
+  {
+    id: 4,
+    title: "糖醋里脊",
+    description: "酸甜可口，外酥里嫩",
+    difficulty: "中等",
+    mainIngredients: ["猪里脊"],
+  },
+  {
+    id: 5,
+    title: "鱼香肉丝",
+    description: "川菜经典，酸甜微辣",
+    difficulty: "中等",
+    mainIngredients: ["猪里脊", "木耳", "胡萝卜"],
   },
 ];
+
+// 提取所有唯一主要食材
+const allMainIngredients = Array.from(
+  new Set(recipes.flatMap((recipe) => recipe.mainIngredients))
+);
 
 // 模拟厨师数据
 const chefs = [
@@ -36,30 +58,63 @@ const chefs = [
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
   const [filteredRecipes, setFilteredRecipes] = useState(recipes);
   const [filteredChefs, setFilteredChefs] = useState(chefs);
 
-  // 搜索功能
+  // 搜索和筛选功能
   useEffect(() => {
-    if (searchTerm.trim() === "") {
-      setFilteredRecipes(recipes);
-      setFilteredChefs(chefs);
-    } else {
+    let result = recipes;
+
+    // 文本搜索
+    if (searchTerm.trim() !== "") {
       const term = searchTerm.toLowerCase();
-      const filteredRecipes = recipes.filter(
+      result = result.filter(
         (recipe) =>
           recipe.title.toLowerCase().includes(term) ||
           recipe.description.toLowerCase().includes(term)
       );
+    }
+
+    // 主要食材筛选
+    if (selectedIngredients.length > 0) {
+      result = result.filter((recipe) =>
+        selectedIngredients.every((ingredient) =>
+          recipe.mainIngredients.includes(ingredient)
+        )
+      );
+    }
+
+    setFilteredRecipes(result);
+
+    // 厨师搜索
+    if (searchTerm.trim() === "") {
+      setFilteredChefs(chefs);
+    } else {
+      const term = searchTerm.toLowerCase();
       const filteredChefs = chefs.filter(
         (chef) =>
           chef.name.toLowerCase().includes(term) ||
           chef.specialty.toLowerCase().includes(term)
       );
-      setFilteredRecipes(filteredRecipes);
       setFilteredChefs(filteredChefs);
     }
-  }, [searchTerm]);
+  }, [searchTerm, selectedIngredients]);
+
+  // 切换食材选择
+  const toggleIngredient = (ingredient: string) => {
+    setSelectedIngredients((prev) =>
+      prev.includes(ingredient)
+        ? prev.filter((item) => item !== ingredient)
+        : [...prev, ingredient]
+    );
+  };
+
+  // 清除所有筛选
+  const clearFilters = () => {
+    setSearchTerm("");
+    setSelectedIngredients([]);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -100,6 +155,58 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Ingredients Filter */}
+      <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+        <div className="flex flex-wrap items-center gap-2 mb-4">
+          <span className="text-gray-700 font-medium">主要食材筛选:</span>
+          {allMainIngredients.map((ingredient) => (
+            <button
+              key={ingredient}
+              onClick={() => toggleIngredient(ingredient)}
+              className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                selectedIngredients.includes(ingredient)
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              }`}
+            >
+              {ingredient}
+            </button>
+          ))}
+        </div>
+
+        {/* Active Filters */}
+        {(searchTerm || selectedIngredients.length > 0) && (
+          <div className="flex flex-wrap items-center gap-2 mb-4">
+            <span className="text-gray-700 font-medium">当前筛选:</span>
+            {searchTerm && (
+              <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-sm">
+                搜索: {searchTerm}
+              </span>
+            )}
+            {selectedIngredients.map((ingredient) => (
+              <span
+                key={ingredient}
+                className="px-2 py-1 bg-green-100 text-green-800 rounded text-sm flex items-center"
+              >
+                {ingredient}
+                <button
+                  onClick={() => toggleIngredient(ingredient)}
+                  className="ml-1 text-green-600 hover:text-green-800"
+                >
+                  ×
+                </button>
+              </span>
+            ))}
+            <button
+              onClick={clearFilters}
+              className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-sm hover:bg-gray-200"
+            >
+              清除筛选
+            </button>
+          </div>
+        )}
+      </div>
+
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
@@ -114,7 +221,9 @@ export default function Home() {
         {/* Featured Recipes Section */}
         <section className="mb-16">
           <h3 className="text-xl font-semibold text-gray-800 mb-6">
-            {searchTerm ? `搜索结果 (${filteredRecipes.length})` : "推荐菜谱"}
+            {searchTerm || selectedIngredients.length > 0
+              ? `搜索结果 (${filteredRecipes.length})`
+              : "推荐菜谱"}
           </h3>
           {filteredRecipes.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -131,6 +240,12 @@ export default function Home() {
           ) : (
             <div className="text-center py-12">
               <p className="text-gray-600">没有找到相关的菜谱</p>
+              <button
+                onClick={clearFilters}
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                清除筛选条件
+              </button>
             </div>
           )}
         </section>
