@@ -4,57 +4,30 @@ import RecipeCard from "@/app/components/RecipeCard";
 import ChefCard from "@/app/components/ChefCard";
 import { useState, useEffect } from "react";
 
-// 模拟菜谱数据（包含主要食材信息）
-const recipes = [
-  {
-    id: 1,
-    title: "红烧肉",
-    description: "经典中式菜肴，肥而不腻",
-    difficulty: "中等",
-    mainIngredients: ["五花肉"],
-  },
-  {
-    id: 2,
-    title: "宫保鸡丁",
-    description: "经典川菜，酸甜可口",
-    difficulty: "简单",
-    mainIngredients: ["鸡胸肉", "花生米"],
-  },
-  {
-    id: 3,
-    title: "麻婆豆腐",
-    description: "麻辣鲜香，下饭佳品",
-    difficulty: "简单",
-    mainIngredients: ["嫩豆腐", "牛肉末"],
-  },
-  {
-    id: 4,
-    title: "糖醋里脊",
-    description: "酸甜可口，外酥里嫩",
-    difficulty: "中等",
-    mainIngredients: ["猪里脊"],
-  },
-  {
-    id: 5,
-    title: "鱼香肉丝",
-    description: "川菜经典，酸甜微辣",
-    difficulty: "中等",
-    mainIngredients: ["猪里脊", "木耳", "胡萝卜"],
-  },
-];
+// 从数据文件加载菜谱和厨师数据
+import recipesData from "@/app/data/recipes.json";
+import chefsData from "@/app/data/chefs.json";
+
+// 从数据文件加载菜谱数据
+const recipes = recipesData.map((recipe) => ({
+  id: recipe.id,
+  title: recipe.title,
+  description: recipe.description,
+  difficulty: recipe.difficulty,
+  mainIngredients: recipe.mainIngredients,
+}));
 
 // 提取所有唯一主要食材
 const allMainIngredients = Array.from(
   new Set(recipes.flatMap((recipe) => recipe.mainIngredients))
 );
 
-// 模拟厨师数据
-const chefs = [
-  { id: 1, name: "张大厨", specialty: "川菜专家" },
-  { id: 2, name: "李师傅", specialty: "粤菜大师" },
-  { id: 3, name: "王师傅", specialty: "面点专家" },
-  { id: 4, name: "陈师傅", specialty: "烘焙大师" },
-];
+// 从数据文件加载厨师数据
+const chefs = chefsData.map((chef) => ({
+  id: chef.id,
+  name: chef.name,
+  specialty: chef.specialty,
+}));
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");

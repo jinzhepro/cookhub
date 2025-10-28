@@ -2,42 +2,20 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 
-// 模拟厨师数据
-const chefs = [
-  {
-    id: 1,
-    name: "张大厨",
-    specialty: "川菜专家",
-    bio: "拥有20年川菜制作经验，擅长传统川菜和创新融合菜。",
-  },
-  {
-    id: 2,
-    name: "李师傅",
-    specialty: "粤菜大师",
-    bio: "粤菜烹饪技艺精湛，对点心制作有独到见解。",
-  },
-  {
-    id: 3,
-    name: "王师傅",
-    specialty: "面点专家",
-    bio: "精通各种面点制作，尤其擅长手工拉面和包子。",
-  },
-  {
-    id: 4,
-    name: "陈师傅",
-    specialty: "烘焙大师",
-    bio: "西式烘焙技艺娴熟，擅长制作蛋糕和面包。",
-  },
-];
+// 从数据文件加载厨师和菜谱数据
+import chefsData from "@/app/data/chefs.json";
+import recipesData from "@/app/data/recipes.json";
 
-// 模拟该厨师的菜谱数据
-const recipes = [
-  { id: 1, chefId: 1, title: "红烧肉", difficulty: "中等" },
-  { id: 2, chefId: 2, title: "宫保鸡丁", difficulty: "简单" },
-  { id: 3, chefId: 1, title: "麻婆豆腐", difficulty: "简单" },
-  { id: 4, chefId: 3, title: "手工拉面", difficulty: "中等" },
-  { id: 5, chefId: 4, title: "奶油蛋糕", difficulty: "困难" },
-];
+// 从数据文件加载厨师数据
+const chefs = chefsData;
+
+// 从数据文件加载菜谱数据并转换格式
+const recipes = recipesData.map((recipe) => ({
+  id: recipe.id,
+  chefId: chefs.find((chef) => chef.name === recipe.chef)?.id || 0,
+  title: recipe.title,
+  difficulty: recipe.difficulty,
+}));
 
 // 根据ID获取厨师
 function getChef(id: number) {
