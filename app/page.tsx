@@ -3,6 +3,7 @@
 import RecipeCard from "@/app/components/RecipeCard";
 import ChefCard from "@/app/components/ChefCard";
 import Header from "@/app/components/Header";
+import AppContent from "@/app/components/AppContent";
 import { useState, useEffect } from "react";
 
 // 从数据文件加载菜谱和厨师数据
@@ -96,7 +97,7 @@ export default function Home() {
       <Header logoSize="large" showSubtitle={true} />
 
       {/* Search Bar */}
-      <div className="max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+      <AppContent className="py-6">
         <div className="relative max-w-2xl mx-auto">
           <input
             type="text"
@@ -122,10 +123,10 @@ export default function Home() {
             </svg>
           </div>
         </div>
-      </div>
+      </AppContent>
 
       {/* Ingredients Filter */}
-      <div className="max-w-6xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+      <AppContent className="py-4">
         <div className="flex flex-wrap items-center gap-2 mb-4">
           <span className="text-gray-700 font-medium">你想吃什么？</span>
           {allMainIngredients.map((ingredient) => (
@@ -174,73 +175,75 @@ export default function Home() {
             </button>
           </div>
         )}
-      </div>
+      </AppContent>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 flex-1">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-            欢迎来到 CookHub
-          </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            探索来自互联网平台的名厨菜谱，学习制作美味佳肴
-          </p>
-        </div>
+      <main className="flex-1">
+        <AppContent>
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              欢迎来到 CookHub
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              探索来自互联网平台的名厨菜谱，学习制作美味佳肴
+            </p>
+          </div>
 
-        {/* Featured Recipes Section */}
-        <section className="mb-16">
-          <h3 className="text-xl font-semibold text-gray-800 mb-6">
-            {searchTerm || selectedIngredients.length > 0
-              ? `搜索结果 (${filteredRecipes.length})`
-              : "推荐菜谱"}
-          </h3>
-          {filteredRecipes.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredRecipes.map((recipe) => (
-                <RecipeCard
-                  key={recipe.id}
-                  id={recipe.id}
-                  title={recipe.title}
-                  description={recipe.description}
-                  difficulty={recipe.difficulty}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-600">没有找到相关的菜谱</p>
-              <button
-                onClick={clearFilters}
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-              >
-                清除筛选条件
-              </button>
-            </div>
-          )}
-        </section>
+          {/* Featured Recipes Section */}
+          <section className="mb-16">
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">
+              {searchTerm || selectedIngredients.length > 0
+                ? `搜索结果 (${filteredRecipes.length})`
+                : "推荐菜谱"}
+            </h3>
+            {filteredRecipes.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredRecipes.map((recipe) => (
+                  <RecipeCard
+                    key={recipe.id}
+                    id={recipe.id}
+                    title={recipe.title}
+                    description={recipe.description}
+                    difficulty={recipe.difficulty}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-600">没有找到相关的菜谱</p>
+                <button
+                  onClick={clearFilters}
+                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                >
+                  清除筛选条件
+                </button>
+              </div>
+            )}
+          </section>
 
-        {/* Chef Section */}
-        <section>
-          <h3 className="text-xl font-semibold text-gray-800 mb-6">
-            {searchTerm ? `相关厨师 (${filteredChefs.length})` : "知名厨师"}
-          </h3>
-          {filteredChefs.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {filteredChefs.map((chef) => (
-                <ChefCard
-                  key={chef.id}
-                  id={chef.id}
-                  name={chef.name}
-                  specialty={chef.specialty}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-600">没有找到相关的厨师</p>
-            </div>
-          )}
-        </section>
+          {/* Chef Section */}
+          <section>
+            <h3 className="text-xl font-semibold text-gray-800 mb-6">
+              {searchTerm ? `相关厨师 (${filteredChefs.length})` : "知名厨师"}
+            </h3>
+            {filteredChefs.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {filteredChefs.map((chef) => (
+                  <ChefCard
+                    key={chef.id}
+                    id={chef.id}
+                    name={chef.name}
+                    specialty={chef.specialty}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-600">没有找到相关的厨师</p>
+              </div>
+            )}
+          </section>
+        </AppContent>
       </main>
     </div>
   );
