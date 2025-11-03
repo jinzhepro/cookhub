@@ -1,4 +1,4 @@
-# CookHub - 抖音名厨菜谱集合
+# CookHub - 名厨菜谱集合
 
 <div align="center">
 
@@ -199,7 +199,7 @@ npm run build
 
 ## 🙏 致谢
 
-- 感谢所有提供菜谱的抖音名厨
+- 感谢所有提供菜谱的名厨
 - 基于 [Next.js](https://nextjs.org) 框架构建
 - 使用 [Tailwind CSS](https://tailwindcss.com) 进行样式设计
 

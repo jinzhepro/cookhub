@@ -32,7 +32,7 @@ This file provides guidance to agents when working with code in this repository.
 ### 中文内容处理
 
 - 所有内容都是中文，需要保持 UTF-8 编码
-- 厨师数据包含真实的抖音美食博主信息
+- 厨师数据包含真实的美食博主信息
 - 菜谱数据包含详细的制作步骤和食材清单
 
 ### 开发注意事项
