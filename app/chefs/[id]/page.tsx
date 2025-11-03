@@ -48,7 +48,7 @@ export default async function ChefDetail({
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
-      <Header showBackLink={true} logoSize="small" showSubtitle={false} />
+      <Header showBackLink={true} logoSize="large" showSubtitle={false} />
 
       {/* Main Content */}
       <main className="flex-1">

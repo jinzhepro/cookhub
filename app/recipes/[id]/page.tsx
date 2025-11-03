@@ -33,7 +33,7 @@ export default async function RecipeDetail({
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
-      <Header showBackLink={false} logoSize="large" showSubtitle={false} />
+      <Header showBackLink={true} logoSize="large" />
 
       {/* Main Content */}
       <main className="flex-1">

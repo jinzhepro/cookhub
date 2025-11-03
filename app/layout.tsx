@@ -8,7 +8,7 @@ import Footer from "@/app/components/Footer";
 // });
 
 export const metadata: Metadata = {
-  title: "CookHub - 名厨菜谱集合",
+  title: "CookHub - 名厨菜谱",
   description: "发现和学习来自互联网平台的名厨菜谱",
   icons: {
     icon: "/ico.png",
